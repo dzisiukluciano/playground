@@ -4,14 +4,16 @@ import (
 	"fmt"
 )
 
-var p = fmt.Println
+var log = func(v ...interface{}) {
+	_, _ = fmt.Println(v...)
+}
 
 func mergesort(a []int) []int {
 	if len(a) <= 1 {
 		return a
 	}
 	mid := int(len(a) / 2)
-	p("mid", mid)
+	log("mid", mid)
 	left := mergesort(a[:mid])
 	right := mergesort(a[mid:])
 	return merge(left, right)
@@ -43,5 +45,5 @@ func merge(left, right []int) []int {
 
 func main() {
 	a1 := []int{5, 7, 3, 8, 9, 1, 23, 10}
-	fmt.Println(mergesort(a1))
+	log(mergesort(a1))
 }

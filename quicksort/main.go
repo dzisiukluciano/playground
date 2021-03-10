@@ -5,6 +5,10 @@ import (
 	"math/rand"
 )
 
+var log = func(v ...interface{}) {
+	_, _ = fmt.Println(v...)
+}
+
 func quickSort(a []int, iteration *int) []int {
 	if len(a) < 2 {
 		return a
@@ -15,7 +19,7 @@ func quickSort(a []int, iteration *int) []int {
 	pivot := a[i]
 	// importante, si uso random, muevo el pivot al final
 	a[i], a[right] = a[right], a[i]
-	fmt.Println("pivot ", pivot)
+	log("pivot ", pivot)
 	for pos, v := range a {
 		*iteration++
 		if v < pivot {
@@ -40,10 +44,10 @@ func main() {
 	a2 := []int{7,1,8,3,2,5,9}
 
 	it1 := 0
-	fmt.Println(quickSort(a1, &it1))
-	fmt.Println(it1, " iterations with n = ", len(a1))
-	fmt.Println("------ 2nd example ------")
+	log(quickSort(a1, &it1))
+	log(it1, " iterations with n = ", len(a1))
+	log("------ 2nd example ------")
 	it2 := 0
-	fmt.Println(quickSort(a2, &it2))
-	fmt.Println(it2, " iterations with n = ", len(a2))
+	log(quickSort(a2, &it2))
+	log(it2, " iterations with n = ", len(a2))
 }
