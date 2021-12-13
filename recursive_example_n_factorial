@@ -5,39 +5,42 @@ import (
 )
 
 // O(n^2) because is n+(n-1)+(n-2)+...+1 = Sum(1 to n) of n = n*(n+1)/2 =~ (1/2)(n*n) =~ n^2
-func fn(n int, it *int) {
-	if n == 0 {
-		return
-	}
-	for i:=0; i<n; i++ {
-		*it++
-	}
-	fn(n-1, it)
-		
-}
-
-// bigger than O(n!) for some reason (TODO)
-func fn2(n int, it2 *int) {
+func sum(n int, res *int) {
 	if n == 1 {
+		*res++
 		return
 	}
-	for i:=0; i<n; i++ {
-		*it2++
-		fn2(n-1, it2)
+	for i := 0; i < n; i++ {
+		*res++
 	}
-		
+	sum(n-1, res)
+
 }
 
+// calls to this function are more than O(n!) - is almost O(n * n!)
+func exponential(n int, res *int, calls *int) {
+	*calls++
+	if n == 1 {
+		// end of the three (leaves), there will be n! of them
+		*res++
+		return
+	}
+	for i := 0; i < n; i++ {
+		//*res++
+		exponential(n-1, res, calls)
+	}
 
+}
 
 func main() {
 	n := 10
-	it := 0
-	fn(n, &it)
-	fmt.Println(it)
-	
+	result := 0
+	sum(n, &result)
+	fmt.Println(result)
+
 	n2 := 4
-	it2 := 0
-	fn2(n2, &it2)
-	fmt.Println(it2)
+	result2 := 0
+	calls := 0
+	exponential(n2, &result2, &calls)
+	fmt.Println(result2, "-", calls)
 }
