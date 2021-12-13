@@ -17,7 +17,7 @@ func sum(n int, res *int) {
 
 }
 
-// calls to this function are more than O(n!) - is almost O(n * n!)
+// calls to this function are more than O(n!) - is almost O(n * n!): n! + n!/2 + (n!/2)/3 + ... + 1
 func exponential(n int, res *int, calls *int) {
 	*calls++
 	if n == 1 {
